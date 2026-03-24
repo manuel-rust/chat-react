@@ -10,6 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  CARGO_TERM_COLOR: always
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +25,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6.3.0
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm' # 🚀 mejora performance
 
       - name: Install dependencies
