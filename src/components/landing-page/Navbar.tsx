@@ -8,26 +8,14 @@ import {
 } from "lucide-react"
 import Login from "../Login"
 import Register from "../Register"
+import { useModal } from "../../hooks/useModal"
 
 type ModalType = "login" | "register" | null
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [modal, setModal] = useState<ModalType>(null)
-
-  const handleMobileClick = (section: string) => {
-    setIsOpen(false)
-
-    setTimeout(() => {
-      if (section === "Login") {
-        setModal("login")
-      } else if (section === "Sign up") {
-        setModal("register")
-      } else {
-        alert(`${section} 🚧 Página en construcción`)
-      }
-    }, 300)
-  }
+  const { openModal } = useModal()
 
   return (
     <>
@@ -44,19 +32,19 @@ export default function Navbar() {
           {/* Desktop nav */}
           <nav className="hidden md:flex space-x-8 text-gray-600 font-medium">
             <button
-              onClick={() => alert("Características 🚧 Página en construcción")}
+              onClick={() => openModal("Características")}
               className="hover:text-blue-600 transition"
             >
               Características
             </button>
             <button
-              onClick={() => alert("Planes 🚧 Página en construcción")}
+              onClick={() => openModal("Planes")}
               className="hover:text-blue-600 transition"
             >
               Planes
             </button>
             <button
-              onClick={() => alert("Soporte 🚧 Página en construcción")}
+              onClick={() => openModal("Soporte")}
               className="hover:text-blue-600 transition"
             >
               Soporte
@@ -112,7 +100,7 @@ export default function Navbar() {
         {/* Mobile options */}
         <div className="flex flex-col items-start justify-center flex-1 space-y-6 text-lg font-medium w-full px-6">
           <button
-            onClick={() => handleMobileClick("Características")}
+            onClick={() => openModal("Características")}
             className="flex items-center gap-3 w-full max-w-xs p-4 rounded-xl hover:bg-gray-100 transition text-left"
           >
             <LayoutDashboard className="w-5 h-5 text-blue-600 shrink-0" />
@@ -120,7 +108,7 @@ export default function Navbar() {
           </button>
 
           <button
-            onClick={() => handleMobileClick("Planes")}
+            onClick={() => openModal("Planes")}
             className="flex items-center gap-3 w-full max-w-xs p-4 rounded-xl hover:bg-gray-100 transition text-left"
           >
             <CreditCard className="w-5 h-5 text-blue-600 shrink-0" />
@@ -128,7 +116,7 @@ export default function Navbar() {
           </button>
 
           <button
-            onClick={() => handleMobileClick("Soporte")}
+            onClick={() => openModal("Soporte")}
             className="flex items-center gap-3 w-full max-w-xs p-4 rounded-xl hover:bg-gray-100 transition text-left"
           >
             <Headphones className="w-5 h-5 text-blue-600 shrink-0" />
@@ -137,7 +125,7 @@ export default function Navbar() {
 
           <div className="pt-6 space-y-4 w-full max-w-xs">
             <button
-              onClick={() => handleMobileClick("Login")}
+              onClick={() => setModal("login")}
               className="flex items-center gap-3 w-full max-w-xs p-4 rounded-xl hover:bg-gray-100 transition text-left"
             >
               <LogIn className="w-5 h-5 text-blue-600 shrink-0" />
@@ -145,7 +133,7 @@ export default function Navbar() {
             </button>
 
             <button
-              onClick={() => handleMobileClick("Sign up")}
+              onClick={() => setModal("register")}
               className="flex items-center gap-3 w-full max-w-xs p-4 rounded-xl hover:bg-gray-100 transition text-left"
             >
               <UserPlus className="w-5 h-5 text-blue-600 shrink-0" />
