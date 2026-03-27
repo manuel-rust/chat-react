@@ -2,9 +2,10 @@ import { useState } from "react"
 
 type LoginProps = {
   variant?: "page" | "modal"
+  onSuccess?: () => void
 }
 
-export default function Login({ variant = "page" }: LoginProps) {
+export default function Login({ variant = "page", onSuccess }: LoginProps) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -19,7 +20,7 @@ export default function Login({ variant = "page" }: LoginProps) {
     }
 
     console.log("Login submit:", { email, password })
-    alert("Login enviado! Reemplaza esto con tu lógica real.")
+    onSuccess?.()
   }
 
   return (

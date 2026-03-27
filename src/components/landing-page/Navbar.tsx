@@ -12,7 +12,11 @@ import { useModal } from "../../hooks/useModal"
 
 type ModalType = "login" | "register" | null
 
-export default function Navbar() {
+type NavbarProps = {
+  onLoginSuccess: () => void
+}
+
+export default function Navbar({ onLoginSuccess }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [modal, setModal] = useState<ModalType>(null)
   const { openModal } = useModal()
@@ -154,7 +158,10 @@ export default function Navbar() {
               ✕
             </button>
 
-            {modal === "login" && <Login variant="modal" />}
+            {modal === "login" && <Login variant="modal" onSuccess={() => {
+              setModal(null)
+              onLoginSuccess()
+            }} />}
             {modal === "register" && <Register variant="modal" />}
           </div>
         </div>
