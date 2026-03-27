@@ -36,13 +36,6 @@ export default function ChatLayout({ onLogout }: ChatLayoutProps) {
           <h1 className="text-2xl font-bold text-gray-800 tracking-tight">
             Chat<span className="text-blue-600">Flow</span>
           </h1>
-
-          <button
-            onClick={onLogout}
-            className="text-sm text-red-500 hover:underline"
-          >
-            Cerrar sesión
-          </button>
         </div>
 
         {/* Lista de contactos */}
@@ -56,6 +49,7 @@ export default function ChatLayout({ onLogout }: ChatLayoutProps) {
       {/* Chat */}
       <ChatWindow
         messages={conversations[activeContactId] || []}
+        onLogout={onLogout}
       />
     </div>
   )
